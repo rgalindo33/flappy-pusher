@@ -25,6 +25,8 @@ var mainState = {
 
         // Add gravity to the bird to make it fall
         this.bird.body.gravity.y = 900;
+         // Move the anchor to the left and downward
+        this.bird.anchor.setTo(-0.2, 0.5);
 
         // Add pipes to our game
         this.timer = game.time.events.loop(1500, this.addRowOfPipes, this);
@@ -45,6 +47,10 @@ var mainState = {
         if (this.bird.y < 0 || this.bird.y > 490)
             this.restartGame();
 
+        // add angle to the direction the bird flyes
+        if (this.bird.angle < 20)
+            this.bird.angle += 1;
+
         // kill flappy if he hits a pipe line
         game.physics.arcade.overlap(
             this.bird, this.pipes, this.restartGame, null, this);
@@ -53,6 +59,9 @@ var mainState = {
     jump: function() {
         // Add a vertical velocity to the bird
         this.bird.body.velocity.y = -300;
+
+        // animate jumping bird
+        game.add.tween(this.bird).to({angle: -20}, 100).start();
     },
 
     addOnePipe: function(x, y) {
