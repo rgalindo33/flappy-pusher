@@ -24,7 +24,7 @@ var mainState = {
         game.physics.arcade.enable(this.bird);
 
         // Add gravity to the bird to make it fall
-        this.bird.body.gravity.y = 1000;
+        this.bird.body.gravity.y = 900;
 
         // Add pipes to our game
         this.timer = game.time.events.loop(1500, this.addRowOfPipes, this);
@@ -52,7 +52,7 @@ var mainState = {
     // Make the bird jump
     jump: function() {
         // Add a vertical velocity to the bird
-        this.bird.body.velocity.y = -350;
+        this.bird.body.velocity.y = -300;
     },
 
     addOnePipe: function(x, y) {
@@ -118,24 +118,15 @@ button
     //  var spaceKey = game.input.keyboard.addKey(
     //                     Phaser.Keyboard.SPACEBAR);
     // spaceKey.onDown.add(this.jump, this);
-    output.innerText = "⬇️\n" +
-      JSON.stringify(data, null, 2);
   });
-
-
-
-/* some other handy things */
 
 // button release:
 button
   .bind('release', function(data) {
-    output.innerText = "⬆️\n" +
-      JSON.stringify(data, null, 2);
   });
 
 
 // pusher connection:
 pusher.connection
   .bind('connected', function(){
-    output.innerText = '👍';
   });
