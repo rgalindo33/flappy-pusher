@@ -29,6 +29,10 @@ var mainState = {
         // Add pipes to our game
         this.timer = game.time.events.loop(1500, this.addRowOfPipes, this);
 
+        // Add score to our game
+        this.score = 0;
+        this.labelScore = game.add.text(20, 20, "0", { font: "30px Arial", fill: "#ffffff" });
+
         // Call the 'jump' function when the spacekey is hit
         var spaceKey = game.input.keyboard.addKey(
                         Phaser.Keyboard.SPACEBAR);
@@ -66,6 +70,10 @@ var mainState = {
     },
 
     addRowOfPipes: function() {
+        // increase score
+        this.score += 1;
+        this.labelScore.text = this.score;
+
         // Randomly pick a number between 1 and 5
         // This will be the hole position
         var hole = Math.floor(Math.random() * 5) + 1;
