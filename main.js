@@ -4,11 +4,12 @@ var mainState = {
         // Load the bird sprite
         game.load.image('bird', 'assets/bird.png');
         game.load.image('pipe', 'assets/pipe.png');
+
     },
 
     create: function() {
-        // Change the background color of the game to blue
-        game.stage.backgroundColor = '#71c5cf';
+        // Change the background color of the game to match fullstackfest
+        game.stage.backgroundColor = '#10161e';
 
         // Set the physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -33,7 +34,7 @@ var mainState = {
 
         // Add score to our game
         this.score = 0;
-        this.labelScore = game.add.text(20, 20, "0", { font: "30px Arial", fill: "#ffffff" });
+        this.labelScore = game.add.text(20, 20, "0", { font: "30px sans-serif", fill: "#ffffff" });
 
         // Call the 'jump' function when the spacekey is hit
         var spaceKey = game.input.keyboard.addKey(
@@ -48,7 +49,7 @@ var mainState = {
             this.restartGame();
 
         // add angle to the direction the bird flyes
-        if (this.bird.angle < 20)
+        if (this.bird.angle < 50)
             this.bird.angle += 1;
 
         // kill flappy if he hits a pipe line
