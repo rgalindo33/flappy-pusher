@@ -4,12 +4,15 @@ var mainState = {
         // Load the bird sprite
         game.load.image('bird', 'assets/bird.png');
         game.load.image('pipe', 'assets/pipe.png');
-
+        game.load.image('background', 'assets/background.png');
+        game.load.audio('jump', 'assets/jump.wav');
+        game.load.audio('die', 'assets/dead.wav');
     },
 
     create: function() {
         // Change the background color of the game to match fullstackfest
         game.stage.backgroundColor = '#10161e';
+        game.add.tileSprite(0, 0, 800, 600, 'background');
 
         // Set the physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -36,6 +39,11 @@ var mainState = {
         this.score = 0;
         this.labelScore = game.add.text(20, 20, "0", { font: "30px sans-serif", fill: "#ffffff" });
 
+        // add sounds when jumping
+        this.jumpSound = game.add.audio('jump');
+        // and when dying
+        this.dieSound = game.add.audio('die');
+
         // Call the 'jump' function when the spacekey is hit
         var spaceKey = game.input.keyboard.addKey(
                         Phaser.Keyboard.SPACEBAR);
@@ -45,7 +53,7 @@ var mainState = {
     update: function() {
         // If the bird is out of the screen (too high or too low)
         // Call the 'restartGame' function
-        if (this.bird.y < 0 || this.bird.y > 490)
+        if (this.bird.y < 0 || this.bird.y > 600)
             this.restartGame();
 
         // add angle to the direction the bird flyes
@@ -64,6 +72,9 @@ var mainState = {
         // Add a vertical velocity to the bird
         this.bird.body.velocity.y = -300;
 
+        //play sound
+        this.jumpSound.play();
+
         // animate jumping bird
         game.add.tween(this.bird).to({angle: -20}, 100).start();
     },
@@ -73,6 +84,9 @@ var mainState = {
         // It means the bird is already falling off the screen
         if (this.bird.alive == false)
             return;
+
+        //play sound
+        this.dieSound.play();
 
         // Set the alive property of the bird to false
         this.bird.alive = false;
@@ -111,13 +125,13 @@ var mainState = {
 
         // Randomly pick a number between 1 and 5
         // This will be the hole position
-        var hole = Math.floor(Math.random() * 5) + 1;
+        var hole = Math.floor(Math.random() * 6) + 1;
 
         // Add the 6 pipes
         // With one big hole at position 'hole' and 'hole + 1'
-        for (var i = 0; i < 8; i++)
+        for (var i = 0; i < 10; i++)
             if (i != hole && i != hole + 1)
-                this.addOnePipe(400, i * 60 + 10);
+                this.addOnePipe(600, i * 60 + 10);
     },
 
     // Restart the game
@@ -128,8 +142,8 @@ var mainState = {
 
 };
 
-// Initialize Phaser, and create a 400px by 490px game
-var game = new Phaser.Game(400, 490);
+// Initialize Phaser
+var game = new Phaser.Game(800, 600);
 
 // Add the 'mainState' and call it 'main'
 game.state.add('main', mainState);
