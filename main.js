@@ -200,7 +200,7 @@ var pusher = new Pusher('57cad681aa44cad36271', {
   cluster: 'eu'
 });
 
-var button = pusher.subscribe('button-239');
+var button = pusher.subscribe('button');
 
 button
   .bind('press', function(data) {
