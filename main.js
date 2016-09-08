@@ -27,7 +27,7 @@ var mainState = {
         game.physics.arcade.enable(this.bird);
 
         // Add gravity to the bird to make it fall
-        this.bird.body.gravity.y = 900;
+        this.bird.body.gravity.y = 1000;
          // Move the anchor to the left and downward
         this.bird.anchor.setTo(-0.2, 0.5);
 
@@ -46,6 +46,7 @@ var mainState = {
         // Call the 'jump' function when the spacekey is hit
         var spaceKey = game.input.keyboard.addKey(
                         Phaser.Keyboard.SPACEBAR);
+
         spaceKey.onDown.add(this.jump, this);
     },
 
@@ -69,7 +70,7 @@ var mainState = {
         if (this.bird.alive == false)
             return;
         // Add a vertical velocity to the bird
-        this.bird.body.velocity.y = -300;
+        this.bird.body.velocity.y = -400;
 
         //play sound
         this.jumpSound.play();
@@ -124,13 +125,13 @@ var mainState = {
 
         // Randomly pick a number between 1 and 5
         // This will be the hole position
-        var hole = Math.floor(Math.random() * 6) + 1;
+        var hole = Math.floor(Math.random() * 7) + 1;
 
-        // Add the 6 pipes
-        // With one big hole at position 'hole' and 'hole + 1'
-        for (var i = 0; i < 10; i++)
-            if (i != hole && i != hole + 1)
-                this.addOnePipe(600, i * 60 + 10);
+        // Add the N pipes
+        // With one big hole at position 'hole' and 'hole + 1' and 'hole + 2'
+        for (var i = 0; i < 15; i++)
+            if (i != hole && i != hole + 1 && i != hole + 2)
+                this.addOnePipe(800, i * 60 + 0);
     },
 
     // Restart the game
