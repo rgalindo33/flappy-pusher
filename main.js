@@ -1,3 +1,28 @@
+// Menu State before starting the game
+var menuState = {
+    preload : function() {
+        game.load.image('background', 'assets/background.png');
+    },
+
+    create: function () {
+        // Change the background color of the game to match fullstackfest
+        game.add.tileSprite(0, 0, 800, 600, 'background');
+        this.labelBrand = game.add.text(230, 150, " ------------\n| PUSHY BIRD |\n ------------", { font: "60px VT323", fill: "#ffffff" });
+        this.labelBrand = game.add.text(250, 400, " Press button to start", { font: "30px VT323", fill: "#ffffff" });
+
+        // Call the 'startGame' function when the spacekey is hit
+        var spaceKey = game.input.keyboard.addKey(
+                        Phaser.Keyboard.SPACEBAR);
+
+        spaceKey.onDown.add(this.jump, this);
+    },
+
+    jump: function () {
+        // Change the state to the actual game.
+        this.state.start('main');
+    }
+};
+
 // Create our 'main' state that will contain the game
 var mainState = {
     preload: function() {
@@ -143,7 +168,7 @@ var mainState = {
     // Restart the game
     restartGame: function() {
         // Start the 'main' state, which restarts the game
-        game.state.start('main');
+        game.state.start('menu');
     },
 
 };
@@ -153,6 +178,9 @@ var game = new Phaser.Game(800, 600);
 
 // Add the 'mainState' and call it 'main'
 game.state.add('main', mainState);
+
+game.state.add('menu', menuState);
+
 
 // PUSHER STUFF
 var pusher = new Pusher('57cad681aa44cad36271', {
@@ -167,4 +195,4 @@ button
   });
 
 // Start the state to actually start the Game
-game.state.start('main');
+game.state.start('menu');
