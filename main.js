@@ -154,21 +154,17 @@ var game = new Phaser.Game(800, 600);
 // Add the 'mainState' and call it 'main'
 game.state.add('main', mainState);
 
-// Start the state to actually start the game
-game.state.start('main');
-
+// PUSHER STUFF
 var pusher = new Pusher('57cad681aa44cad36271', {
   cluster: 'eu'
 });
 
-var button = pusher.subscribe('button');
+var button = pusher.subscribe('button-239');
 
 button
   .bind('press', function(data) {
-    // console.log("MOE");
-    //  var spaceKey = game.input.keyboard.addKey(
-    //                     Phaser.Keyboard.SPACEBAR);
-    // spaceKey.onDown.add(this.jump, this);
+    console.log("MOE");
+    game.state.states[game.state.current].jump()
   });
 
 // button release:
@@ -181,3 +177,7 @@ button
 pusher.connection
   .bind('connected', function(){
   });
+
+
+// Start the state to actually start the game
+game.state.start('main');
