@@ -163,21 +163,8 @@ var button = pusher.subscribe('button-239');
 
 button
   .bind('press', function(data) {
-    console.log("MOE");
     game.state.states[game.state.current].jump()
   });
-
-// button release:
-button
-  .bind('release', function(data) {
-  });
-
-
-// pusher connection:
-pusher.connection
-  .bind('connected', function(){
-  });
-
 
 // Start the state to actually start the game
 game.state.start('main');
