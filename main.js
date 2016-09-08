@@ -3,7 +3,7 @@ var mainState = {
     preload: function() {
         // Load the bird sprite
         game.load.image('bird', 'assets/bird.png');
-        game.load.image('pipe', 'assets/pipe.png');
+        game.load.image('pipe', 'assets/monitor.png');
         game.load.image('background', 'assets/background.png');
         game.load.audio('jump', 'assets/jump.wav');
         game.load.audio('die', 'assets/dead.wav');
@@ -11,13 +11,12 @@ var mainState = {
 
     create: function() {
         // Change the background color of the game to match fullstackfest
-        game.stage.backgroundColor = '#10161e';
         game.add.tileSprite(0, 0, 800, 600, 'background');
 
         // Set the physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        // Display the bird at the position x=100 and y=245
+        // Display the bird at the position
         this.bird = game.add.sprite(100, 245, 'bird');
 
         // Create an empty group of pipes
