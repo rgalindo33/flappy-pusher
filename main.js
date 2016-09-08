@@ -36,7 +36,13 @@ var mainState = {
 
         // Add score to our game
         this.score = 0;
-        this.labelScore = game.add.text(20, 20, "0", { font: "30px sans-serif", fill: "#ffffff" });
+        this.labelScoreText = game.add.text(20, 20, "SCORE:", { font: "30px VT323", fill: "#ffffff" });
+        this.labelScore = game.add.text(110, 20, "0", { font: "30px VT323", fill: "#ffffff" });
+        this.labelBrand = game.add.text(580, 450, " ----------\n|PUSHY BIRD|\n ----------", { font: "40px VT323", fill: "#ffffff" });
+
+        this.labelScoreText.setShadow(5, 5);
+        this.labelScore.setShadow(5, 5);
+        this.labelBrand.setShadow(5, 5);
 
         // add sounds when jumping
         this.jumpSound = game.add.audio('jump');
