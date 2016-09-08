@@ -166,5 +166,5 @@ button
     game.state.states[game.state.current].jump()
   });
 
-// Start the state to actually start the game
+// Start the state to actually start the Game
 game.state.start('main');
