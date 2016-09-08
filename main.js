@@ -8,13 +8,26 @@ var menuState = {
         // Change the background color of the game to match fullstackfest
         game.add.tileSprite(0, 0, 800, 600, 'background');
         this.labelBrand = game.add.text(230, 150, " ------------\n| PUSHY BIRD |\n ------------", { font: "60px VT323", fill: "#ffffff" });
-        this.labelBrand = game.add.text(250, 400, " Press button to start", { font: "30px VT323", fill: "#ffffff" });
+        this.labelStart = game.add.text(260, 400, "Press button to start", { font: "30px VT323", fill: "#ffffff" });
+        this.labelFooter = game.add.text(320, 550, "@rgalindo33 2016", { font: "20px VT323", fill: "#ffffff" });
 
+
+        this.labelBrand.setShadow(5, 5);
+        this.labelStart.setShadow(5, 5);
+        this.labelFooter.setShadow(5, 5);
         // Call the 'startGame' function when the spacekey is hit
         var spaceKey = game.input.keyboard.addKey(
                         Phaser.Keyboard.SPACEBAR);
 
         spaceKey.onDown.add(this.jump, this);
+        timer = 0;
+    },
+    update: function (){
+        timer += game.time.elapsed; //this is in ms, not seconds.
+        if ( timer >= 1000 ) {
+            timer -= 600;
+            this.labelStart.visible = !this.labelStart.visible;
+        }
     },
 
     jump: function () {
